@@ -50,6 +50,19 @@ $db[DB_DEFAULT]['cachedir'] = "";
 $db[DB_DEFAULT]['char_set'] = "utf8";
 $db[DB_DEFAULT]['dbcollat'] = "utf8_general_ci";
 
+$db[DB_SD_API]['hostname'] = DB_HOST;
+$db[DB_SD_API]['username'] = DB_USER;
+$db[DB_SD_API]['password'] = DB_PASS;
+$db[DB_SD_API]['database'] = DB_SD_API;
+$db[DB_SD_API]['dbdriver'] = "mysql";
+$db[DB_SD_API]['dbprefix'] = "";
+$db[DB_SD_API]['pconnect'] = TRUE;
+$db[DB_SD_API]['db_debug'] = TRUE;
+$db[DB_SD_API]['cache_on'] = FALSE;
+$db[DB_SD_API]['cachedir'] = "";
+$db[DB_SD_API]['char_set'] = "utf8";
+$db[DB_SD_API]['dbcollat'] = "utf8_general_ci";
+
 
 /* End of file database.php */
 /* Location: ./system/application/config/database.php */

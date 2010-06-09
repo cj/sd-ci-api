@@ -10,6 +10,21 @@
 
  // tables
  define('DB_DEFAULT','db_name');
+ define('DB_SD_API','sd_api');
+ 
+ /**
+  * Mailer Settings
+  */
+ define('MAILER_HOST','root');
+ define('MAILER_TYPE','sendmail');
+ 
+ /**
+  * Misc settings
+  */
+  
+ //CHANGING TO LIVE WILL SEND OUT EMAILS TO REAL PEOPLE!
+ define('PRODUCTION_STATUS','DEV');
+ define('DEV_EMAIL','dev@softwaredevs.com');
 
 /*
 |--------------------------------------------------------------------------
