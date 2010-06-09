@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class REST_Controller extends Controller {
+class REST_Controller extends MY_Controller {
     
     // Not what you'd think, set this in a controller to use a default format
     protected $rest_format = NULL;
@@ -359,15 +359,6 @@ class REST_Controller extends Controller {
     
     // SECURITY FUNCTIONS ---------------------------------------------------------
     
-    private function _checkLogin($username = '',$password = FALSE)
-    {
-      
-      $this->load->module_model('common','User_Model','user');
-      
-      return $this->user->authenticate($username,$password,$this->key);
-		  
-    }
-    
     private function _prepareBasicAuth()
     {
     	$username = NULL;
@@ -399,12 +390,7 @@ class REST_Controller extends Controller {
 		{
 		    $this->_forceLogin();
 		} else {
-		  $this->load->module_model('common','User_Model','objLogin');
-			$this->objLogin->restore_session('login');
-			$this->objMemCache = new Memcache;
-      $this->objMemCache->addServer(MEMCACHED_IP1,11211);
-      $this->objMemCache->addServer(MEMCACHED_IP2,11211);
-      
+		  $this->_afterLoginSuccess();      
 		}
 	
 		
@@ -488,46 +474,9 @@ class REST_Controller extends Controller {
   			  if(!$access) $this->_forceLogin();
   			}
   			
-  			$this->load->module_model('common','User_Model','objLogin');
-  			$this->objLogin->restore_session('login');
+  			$this->_afterLoginSuccess();
   			
-  			if(isset($_REQUEST['login']) AND !$this->key)
-  			{
-  			  $this->objLogin->gen_key($this->objLogin->get("id"));
-  			  $this->objLogin->load_data($this->objLogin->get("id"));
-          $this->objLogin->save_session('login');
-          $this->objLogin->restore_session('login');
-  			}
       }
-      $this->objMemCache = new Memcache;
-			$this->objMemCache->addServer(MEMCACHED_IP1,11211);
-			$this->objMemCache->addServer(MEMCACHED_IP2,11211);
-    }
-    
-    
-    private function _forceLogin($nonce = '')
-    {
-	    header('HTTP/1.0 401 Unauthorized');
-	    header('HTTP/1.1 401 Unauthorized');
-	    header('not_logged_in');
-	    
-    	if($this->rest_auth == 'basic')
-        {
-        	header('WWW-Authenticate: Basic realm="'.$this->config->item('rest_realm').'"');
-        }
-        
-        elseif($this->rest_auth == 'digest')
-        {
-        	header('WWW-Authenticate: Digest realm="'.$this->config->item('rest_realm'). '" qop="auth" nonce="'.$nonce.'" opaque="'.md5($this->config->item('rest_realm')).'"');
-        }
-    	
-          print_r(json_encode(array(
-            'success'=>FALSE,
-            'message'=>'User and Password Incorrect.',
-            'results'=> FALSE
-          )));
-        
-	    die();
     }
     // FORMATING FUNCTIONS ---------------------------------------------------------
     
