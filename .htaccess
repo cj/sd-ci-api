@@ -1,8 +1,6 @@
-# @author		Adam Nazar
-# @since		Version 1.0
 <IfModule mod_rewrite.c>
     RewriteEngine On
-     
+    #git hub test
     #this is to remove the index.php in url
     
     #RewriteCond $1 !^(index\.php|images|robots\.txt)
@@ -22,8 +20,8 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     #This last condition enables access to the images and css folders, and the robots.txt file
     #Submitted by Michael Radlmaier (mradlmaier)
-    RewriteCond $1 !^(index\.php|images|robots\.txt|css|js|applets|min|cached|plugins)
-    RewriteRule ^(.*)$ index.php/$1 [L]
+    RewriteCond $1 !^(index\.php|images|robots\.txt|css|uploaded|\.mp3)
+    RewriteRule ^v1/(.*)$ index.php/$1 [L]
     AddType text/x-component .htc
     
 </IfModule>
