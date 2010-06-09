@@ -1,0 +1,11 @@
+.DS_Store
+.tmp_*
+config.php
+constants.php
+._*
+*.log
+RestRequest.php
+system/logs
+file_constants.php
+cached
+cached/*
